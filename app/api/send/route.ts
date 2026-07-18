@@ -1,8 +1,6 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const labelMapping: Record<string, string> = {
   phone: "Telefonnummer",
   subject: "Betreff",
@@ -38,6 +36,7 @@ const valueMapping: Record<string, Record<string, string>> = {
 
 export async function POST(request: Request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const formData = await request.formData();
     
     const type = formData.get('type') as string;
